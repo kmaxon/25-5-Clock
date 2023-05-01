@@ -34,6 +34,4 @@
 
 
 TO DO:
-- timer is all fucked again. the changeable varaible is allowing change during the timer running
-- alarm at the end of each timer
 - add style

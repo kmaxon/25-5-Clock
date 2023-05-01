@@ -8,7 +8,6 @@ function Timer(props) {
         setSessionTime,
         breakTime, 
         setBreakTime,
-        changeable, 
         setChangeable,
         setTimer,
         minutes,
@@ -27,16 +26,17 @@ function Timer(props) {
             intervalId = setInterval(() => {
                 setTimer((prevTimer) => {
                     const newTimer = prevTimer - 1;
-                    if (newTimer < 0) {
+                    if (newTimer <= 0) {
                         alarm.play();
                         setTimeout(() => {
                             if (switchTimer === "Session") {
                                 setSwitchTimer("Break");
-                                handleTime(breakTime);
+                                handleTime(breakTime * 60);
                             } else {
                                 setSwitchTimer("Session");
-                                handleTime(sessionTime);
+                                handleTime(sessionTime * 60);
                             };
+                            setTimer(switchTimer === "Session" ? sessionTime + 60 : breakTime * 60);
                         }, 2000);
                         return prevTimer;
                     }
@@ -65,7 +65,7 @@ function Timer(props) {
 
     function onResetClick() {
         setRunning(false);
-        setChangeable(false);
+        setChangeable(true);
         setSwitchTimer("Session");
         setSessionTime(25);
         setBreakTime(5);
@@ -86,11 +86,11 @@ function Timer(props) {
     };
 
     return (
-        <div>
+        <div id="timer-label" >
             <h3 style={timerStyle}>{switchTimer}</h3>
-            <h2 style={timerStyle}>{`${minutes}:${seconds < 10? '0' + seconds : seconds}`}</h2>
-            <button onClick={onStartPauseClick}>{running ? "Pause" : "Start"}</button>
-            <button onClick={onResetClick}>reset</button>
+            <h2 id="time-left" style={timerStyle}>{`${minutes}:${seconds < 10? '0' + seconds : seconds}`}</h2>
+            <button id="start_stop" onClick={onStartPauseClick}>{running ? "Pause" : "Start"}</button>
+            <button id="reset" onClick={onResetClick}>reset</button>
             <audio id="beep">
                 <source src={alarm} type="audio/wav" />
             </audio>
