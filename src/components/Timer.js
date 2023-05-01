@@ -1,4 +1,7 @@
 import React, {useState, useEffect } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlay, faPause, faRedo } from '@fortawesome/free-solid-svg-icons';
+import "../App.css";
 
 
 function Timer(props) {
@@ -15,7 +18,7 @@ function Timer(props) {
         handleTime,
         switchTimer, 
         setSwitchTimer,
-        alarm
+        alarm,
     } = props;
 
     const [running, setRunning] = useState(false);
@@ -26,17 +29,18 @@ function Timer(props) {
             intervalId = setInterval(() => {
                 setTimer((prevTimer) => {
                     const newTimer = prevTimer - 1;
-                    if (newTimer <= 0) {
+                    if (newTimer < 0) {
                         alarm.play();
                         setTimeout(() => {
                             if (switchTimer === "Session") {
                                 setSwitchTimer("Break");
                                 handleTime(breakTime * 60);
+                                setTimer(breakTime * 60);
                             } else {
                                 setSwitchTimer("Session");
                                 handleTime(sessionTime * 60);
+                                setTimer(sessionTime * 60);
                             };
-                            setTimer(switchTimer === "Session" ? sessionTime + 60 : breakTime * 60);
                         }, 2000);
                         return prevTimer;
                     }
@@ -73,24 +77,55 @@ function Timer(props) {
         handleTime(25 * 60);
     };
 
-    var timerStyle;
-
-    if (minutes < 1) {
-        timerStyle = {
-            color: "red",
-        };
-    } else {
-        timerStyle = {
-            color: "black",
-        };
+    const timerStyle = {
+        display: "flex",
+        flexWrap: "wrap",
+        width: "60%",
+        alignItems: "center",
+        justifyContent: "center",
+        userSelect: "none",
     };
 
+    const contentStyle = {
+        backgroundColor: "white",
+        width: "100%",
+        border: "5px solid black",
+        borderRadius: "20px",
+        margin: "10px",
+        color: "black",
+        textAlign: "center",
+    };
+
+    var sessionStyle = {
+        fontSize: "25px",
+        margin: "20px 10px 10px 10px",
+    };
+
+    var textStyle = {
+        fontSize: "60px",
+        margin: "10px",
+    };
+
+    if (minutes < 1) {
+        textStyle.color = "red";
+        sessionStyle.color = "red";
+        contentStyle.borderColor = "red";
+    };
+
+
+
     return (
-        <div id="timer-label" >
-            <h3 style={timerStyle}>{switchTimer}</h3>
-            <h2 id="time-left" style={timerStyle}>{`${minutes}:${seconds < 10? '0' + seconds : seconds}`}</h2>
-            <button id="start_stop" onClick={onStartPauseClick}>{running ? "Pause" : "Start"}</button>
-            <button id="reset" onClick={onResetClick}>reset</button>
+        <div id="timer-label" style={timerStyle} >
+            <div style={contentStyle}>
+                <h2 style={sessionStyle}>{switchTimer}</h2>
+                <h2 id="time-left" style={textStyle}>{`${minutes}:${seconds < 10? '0' + seconds : seconds}`}</h2>
+            </div>
+            <button id="start_stop" className="button" onClick={onStartPauseClick}>
+                {running ? <FontAwesomeIcon icon={faPause} /> : <FontAwesomeIcon icon={faPlay} />}
+            </button>
+            <button id="reset" className="button" onClick={onResetClick}>
+                <FontAwesomeIcon icon={faRedo} />
+            </button>
             <audio id="beep">
                 <source src={alarm} type="audio/wav" />
             </audio>

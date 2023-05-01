@@ -31,7 +31,3 @@
 - return:
     - start/pause button
     - reset button
-
-
-TO DO:
-- add style

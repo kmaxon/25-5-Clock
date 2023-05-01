@@ -1,6 +1,10 @@
 import React, { useState } from "react"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowDown, faArrowUp } from "@fortawesome/free-solid-svg-icons";
+import "./App.css";
 import Timer from "./components/Timer";
 import alarmSound from "./components/alarm.wav";
+
 
 function App() {
   const [sessionTime, setSessionTime] = useState(25);
@@ -26,6 +30,7 @@ function App() {
         if (input === sessionTime) {
           if (handleFunction !== setBreakTime){
             handleTime((input * 60) + 60);
+            setTimer((input * 60) + 60);
           };
         };
       } else if (arrow.match("down") && input > 1) {
@@ -33,34 +38,83 @@ function App() {
         if (input === sessionTime) {
           if (handleFunction !== setBreakTime) {
             handleTime((input * 60) - 60);
+            setTimer((input * 60) - 60);
           };
         };
       };
     };
   };
 
+  const appStyle = {
+    display: "flex",
+    flexWrap: "wrap",
+    width: "400px",
+    alignItems: "center",
+    justifyContent: "center",
+    userSelect: "none",
+  };
+
+  const titleStyle = {
+    width: "100%",
+    textAlign: "center",
+    fontSize: "60px",
+    margin: "10px"
+  };
+
+  const lengthStyle = {
+    display: "flex",
+    flexWrap: "wrap",
+    width: "50%",
+    justifyContent: "center",
+    alignItems: "center",
+  };
+
+  const lengthTitleStyle = {
+    width: "100%",
+    textAlign: "center",
+    fontSize: "25px",
+    margin: "5px"
+  };
+
+  const timeStyle = {
+    fontSize: "30px",
+    margin: "5px 15px",
+  };
+
   return (
-    <div>
-      <h1>25 + 5 Clock</h1>
-      <div id="break-label">
-        <h3>Break Length</h3>
-        <p id="break-length" >{breakTime}</p>
+    <div style={appStyle}>
+      <h1 style={titleStyle}>25 + 5 Clock</h1>
+      <div id="break-label" style={lengthStyle}>
+        <h3 style={lengthTitleStyle}>Break Length</h3>
         <button 
           id="break-decrement"
-          onClick={() => onClick("down", setBreakTime, breakTime)}>down arrow</button>
+          className="button"
+          onClick={() => onClick("down", setBreakTime, breakTime)}>
+          <FontAwesomeIcon icon={faArrowDown} />
+        </button>
+        <p id="break-length" style={timeStyle}>{breakTime}</p>  
         <button 
           id="break-increment"
-          onClick={() => onClick("up", setBreakTime, breakTime)}>up arrow</button>
+          className="button"
+          onClick={() => onClick("up", setBreakTime, breakTime)}>
+          <FontAwesomeIcon icon={faArrowUp} />
+        </button>
       </div>
-      <div id="session-label">
-        <h3>Session Length</h3>
-        <p id="session-length" >{sessionTime}</p>
+      <div id="session-label" style={lengthStyle}>
+        <h3 style={lengthTitleStyle}>Session Length</h3>
         <button 
           id="session-decrement"
-          onClick={() => onClick("down", setSessionTime, sessionTime)}>down arrow</button>
+          className="button"
+          onClick={() => onClick("down", setSessionTime, sessionTime)}>
+          <FontAwesomeIcon icon={faArrowDown} />
+        </button>
+        <p id="session-length" style={timeStyle}>{sessionTime}</p>
         <button 
           id="session-increment"
-          onClick={() => onClick("up", setSessionTime, sessionTime)}>up arrow</button>
+          className="button"
+          onClick={() => onClick("up", setSessionTime, sessionTime)}>
+          <FontAwesomeIcon icon={faArrowUp} />
+        </button>
       </div>
       <Timer 
         sessionTime={sessionTime}
