@@ -1,7 +1,7 @@
 import React, {useState, useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faPause, faRedo } from '@fortawesome/free-solid-svg-icons';
-import "../App.css";
+import "./Timer.css";
 
 
 function Timer(props) {
@@ -77,53 +77,25 @@ function Timer(props) {
         handleTime(25 * 60);
     };
 
-    const timerStyle = {
-        display: "flex",
-        flexWrap: "wrap",
-        width: "60%",
-        alignItems: "center",
-        justifyContent: "center",
-        userSelect: "none",
-    };
-
-    const contentStyle = {
-        backgroundColor: "white",
-        width: "100%",
-        border: "5px solid black",
-        borderRadius: "20px",
-        margin: "10px",
-        color: "black",
-        textAlign: "center",
-    };
-
-    var sessionStyle = {
-        fontSize: "25px",
-        margin: "20px 10px 10px 10px",
-    };
-
-    var textStyle = {
-        fontSize: "60px",
-        margin: "10px",
-    };
+    const timerStyle = {};
 
     if (minutes < 1) {
-        textStyle.color = "red";
-        sessionStyle.color = "red";
-        contentStyle.borderColor = "red";
+        timerStyle.borderColor = 'red';
+        timerStyle.color = 'red'
     };
 
-
-
     return (
-        <div id="timer-label" style={timerStyle} >
-            <div style={contentStyle}>
-                <h2 style={sessionStyle}>{switchTimer}</h2>
-                <h2 id="time-left" style={textStyle}>{`${minutes}:${seconds < 10? '0' + seconds : seconds}`}</h2>
+        <div id="timer-container" >
+            <div id='timer-display' style={timerStyle}>
+                <div id='timer' style={timerStyle}>
+                    <h2 id='timer-name' style={timerStyle}>{switchTimer}</h2>
+                    <h2 id="time-left" style={timerStyle}>{`${minutes}:${seconds < 10? '0' + seconds : seconds}`}</h2>
+                </div>
             </div>
-            <button id="start_stop" className="button" onClick={onStartPauseClick}>
+            <button id="start_stop" class="button" onClick={onStartPauseClick}>
                 {running ? <FontAwesomeIcon icon={faPause} /> : <FontAwesomeIcon icon={faPlay} />}
             </button>
-            <button id="reset" className="button" onClick={onResetClick}>
+            <button id="reset" class="button" onClick={onResetClick}>
                 <FontAwesomeIcon icon={faRedo} />
             </button>
             <audio id="beep">

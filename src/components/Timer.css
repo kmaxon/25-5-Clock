@@ -1,0 +1,52 @@
+#timer-container{
+    display: flex;
+    flex-wrap: wrap;
+    width: 30%;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+}
+
+#timer-display {  
+    width: 100%;
+    margin: 10px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+#timer {
+    width: 100%;
+    height: auto;
+    border: 1vw solid black;
+    background-color: white;
+    border-radius: 25px;
+}
+
+#timer-name {
+    font-size: 3vw;
+    margin: 4% 0% 0% 0%;
+}
+
+#time-left {
+    font-size: 7.5vw;
+    margin: 10px;
+}
+
+.button {
+    width: 5vw;
+    height: 5vw;
+    margin: 0% 5%;
+    border: none;
+    background-color: transparent;
+    font-size: 3vw;
+    cursor: default;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button:hover {
+    font-size: 5vw;
+    cursor: pointer;
+}

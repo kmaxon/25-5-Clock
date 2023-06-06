@@ -1,5 +1,8 @@
 html, body, #root {
-    background-color: #8F8F8F;
+    background: #171398;
+background: -moz-linear-gradient(top, #171398 0%, #0310AF 32%, #1300F4 100%);
+background: -webkit-linear-gradient(top, #171398 0%, #0310AF 32%, #1300F4 100%);
+background: linear-gradient(to bottom, #171398 0%, #0310AF 32%, #1300F4 100%);
     height: 100vh;
     width: 100vw;
     margin: 0px;

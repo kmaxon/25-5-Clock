@@ -45,74 +45,22 @@ function App() {
     };
   };
 
-  const appStyle = {
-    display: "flex",
-    flexWrap: "wrap",
-    width: "400px",
-    alignItems: "center",
-    justifyContent: "center",
-    userSelect: "none",
-  };
-
-  const titleStyle = {
-    width: "100%",
-    textAlign: "center",
-    fontSize: "60px",
-    margin: "10px"
-  };
-
-  const lengthStyle = {
-    display: "flex",
-    flexWrap: "wrap",
-    width: "50%",
-    justifyContent: "center",
-    alignItems: "center",
-  };
-
-  const lengthTitleStyle = {
-    width: "100%",
-    textAlign: "center",
-    fontSize: "25px",
-    margin: "5px"
-  };
-
-  const timeStyle = {
-    fontSize: "30px",
-    margin: "5px 15px",
-  };
-
   return (
-    <div style={appStyle}>
-      <h1 style={titleStyle}>25 + 5 Clock</h1>
-      <div id="break-label" style={lengthStyle}>
-        <h3 style={lengthTitleStyle}>Break Length</h3>
+    <div id='app' >
+      <h1 id='timer-title' >Interval Timer</h1>
+      <div id="break-label" class='length' >
+        <h3 class='title' >Break Length</h3>
         <button 
           id="break-decrement"
-          className="button"
+          class="button"
           onClick={() => onClick("down", setBreakTime, breakTime)}>
           <FontAwesomeIcon icon={faArrowDown} />
         </button>
-        <p id="break-length" style={timeStyle}>{breakTime}</p>  
+        <p class='time' >{breakTime}</p>  
         <button 
           id="break-increment"
-          className="button"
+          class="button"
           onClick={() => onClick("up", setBreakTime, breakTime)}>
-          <FontAwesomeIcon icon={faArrowUp} />
-        </button>
-      </div>
-      <div id="session-label" style={lengthStyle}>
-        <h3 style={lengthTitleStyle}>Session Length</h3>
-        <button 
-          id="session-decrement"
-          className="button"
-          onClick={() => onClick("down", setSessionTime, sessionTime)}>
-          <FontAwesomeIcon icon={faArrowDown} />
-        </button>
-        <p id="session-length" style={timeStyle}>{sessionTime}</p>
-        <button 
-          id="session-increment"
-          className="button"
-          onClick={() => onClick("up", setSessionTime, sessionTime)}>
           <FontAwesomeIcon icon={faArrowUp} />
         </button>
       </div>
@@ -132,6 +80,23 @@ function App() {
         setSwitchTimer={setSwitchTimer}
         alarm={alarm}
       />
+      <div id="session-label" class='length'>
+        <h3 class='title' >Session Length</h3>
+        <button 
+          id="session-decrement"
+          class="button"
+          onClick={() => onClick("down", setSessionTime, sessionTime)}>
+          <FontAwesomeIcon icon={faArrowDown} />
+        </button>
+        <p class='time' >{sessionTime}</p>
+        <button 
+          id="session-increment"
+          class="button"
+          onClick={() => onClick("up", setSessionTime, sessionTime)}>
+          <FontAwesomeIcon icon={faArrowUp} />
+        </button>
+      </div>
+      
     </div>
   );
 }
